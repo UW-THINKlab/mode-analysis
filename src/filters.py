@@ -1,3 +1,5 @@
+import numpy as np
+
 def make_max_speed_filter(threshold):
     def max_speed_filter(dataframe_with_speeds, average_speed, max_speed):
         if max_speed > threshold:
@@ -37,3 +39,13 @@ def get_filters_for_mode(mode):
     filters.append(sparse_data_filter)
 
     return filters
+
+def should_filter_out_trip_due_to_abnormality(trip_details):
+    if (trip_details['number_of_records'] < 2 or
+        trip_details['total_trip_time_minutes'] <= 0 or
+        trip_details['total_distance_km'] <= 0 or
+        np.isinf(trip_details['average_speed_kmh']) or
+        np.isinf(trip_details['max_speed_kmh'])):
+        return True
+    else:
+        return False

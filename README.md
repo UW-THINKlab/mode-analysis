@@ -80,3 +80,18 @@ Data is only removed if the datapoints for a trip do not have a label for mode o
 _Dataset_Comparison_Graphs_Geolife_, _Dataset_Comparison_Graphs_rMove_, and _Dataset_Comparison_Graphs_Spectus_ are used for comparing the datasets along a handful of metrics at the level of each trip in the dataset.
 
 Graphs are displayed based off metrics generated within _Generate_Dataset_Metrics_, which looks at each individual trip in the dataset and summarizes it in terms of number of records, time duration, distance traveled, density of datapoints, sparsity of datapoints (at 5 second, 30 second, and 1 minute intervals), and average and maximum speed.
+
+##### _Generating sparsity masks for Spectus data (to enable downsampling)_
+
+_Generate_Downsampling_Masks_ contains logic for processing each trip in Spectus, resampling it into invervals of 5 seconds, 20 seconds, 30 seconds and 60 seconds, and then creating an output file summarizing the number of datapoints found in each interval the trip was divided into. The output does not include any intervals with zero datapoints, for the sake of storage space. The unique identifiers for each row are 'trip_id', 'bin_size_sec', and 'bin_index'.
+
+
+### Notes on Data Adjustments
+
+The Spectus dataset is given as raw Location-Based Service (LBS) datapoints that are not divided into stopping points (where the user remains for a period of time), nor trips (datapoints describing the motion of a user between stopping points). For this reason, we have applied the [scikit-mobility framework](https://github.com/scikit-mobility/scikit-mobility) for inferring stopping points and trips, in order to analyze each user's movements by each trip they make.
+
+For the purpose of high quality data, we have filtered out trips from the Spectus dataset that meet the following criteria:
+* number_of_records < 2
+* total_trip_time_minutes <= 0
+* total_distance_km <= 0
+* non-finite speed values, e.g., inf or NaN in average/max speed
