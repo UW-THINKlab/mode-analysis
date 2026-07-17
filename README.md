@@ -95,3 +95,5 @@ For the purpose of high quality data, we have filtered out trips from the Spectu
 * total_trip_time_minutes <= 0
 * total_distance_km <= 0
 * non-finite speed values, e.g., inf or NaN in average/max speed
+
+For the purposes of the all data analyses, aside from the mode analysis, we have decided to not remove oscillations from the data. In other words, we have not smoothed the calculated speeds nor truncated their extremes, in order to show the true form of the data for comparison across databases. This oscillation removal may be done external to this package, as part of the Deep Learning techniques, but not during our pre-processing of the data.
