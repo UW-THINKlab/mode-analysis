@@ -77,9 +77,13 @@ Data is only removed if the datapoints for a trip do not have a label for mode o
 
 ##### _Generating metrics and visualizations for descriptive analysis of each dataset_
 
-_Dataset_Comparison_Graphs_Geolife_, _Dataset_Comparison_Graphs_rMove_, and _Dataset_Comparison_Graphs_Spectus_ are used for comparing the datasets along a handful of metrics at the level of each trip in the dataset.
+_Dataset_Comparison_Graphs_All_Density_ and _Dataset_Comparison_Graphs_All_Sparsity_ are used for comparing the datasets along a handful of metrics at the level of each trip in the dataset.
 
 Graphs are displayed based off metrics generated within _Generate_Dataset_Metrics_, which looks at each individual trip in the dataset and summarizes it in terms of number of records, time duration, distance traveled, density of datapoints, sparsity of datapoints (at 5 second, 30 second, and 1 minute intervals), and average and maximum speed.
+
+![Density](images/Overlapped_Density_Graphs.png)
+
+![Sparsity](images/Overlapped_Sparsity_Graphs.png)
 
 ##### _Generating sparsity masks for Spectus data (to enable downsampling)_
 
