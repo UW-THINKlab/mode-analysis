@@ -110,5 +110,9 @@ rMove_to_generic_mode_map = {
     "Walk (or jog/wheelchair)": "walk",
 }
 
+rMove_to_generic_mode_map_lowercase = {
+    key.lower(): value for key, value in rMove_to_generic_mode_map.items()
+}
+
 def map_rmove_to_generic_mode(rmove_label):
-    return rMove_to_generic_mode_map.get(rmove_label, "key not found")
+    return rMove_to_generic_mode_map_lowercase.get(rmove_label.lower(), rmove_label)
